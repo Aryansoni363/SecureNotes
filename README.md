@@ -1,20 +1,20 @@
 # SecureNotes
 
-SecureNotes is a web-based application designed to help users create, manage, and store notes securely. It emphasizes privacy, encryption, and a user-friendly interface.
+SecureNotes is a web-based application for creating, managing, and securely storing personal notes. It emphasizes privacy and security, ensuring your notes remain confidential.
 
 ## Features
 
-- **End-to-End Encryption**: All notes are encrypted before storage.
-- **User Authentication**: Secure login and registration.
-- **Rich Text Editing**: Format your notes with ease.
-- **Search & Organize**: Tag and search notes efficiently.
-- **Cross-Platform**: Access your notes from any device.
+- **User Authentication:** Secure login and registration.
+- **End-to-End Encryption:** Notes are encrypted before storage.
+- **Rich Text Editing:** Format your notes with a simple editor.
+- **Search & Organization:** Tag and search notes easily.
+- **Responsive Design:** Works on desktop and mobile devices.
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v14+)
+- Node.js (v16+)
 - npm or yarn
 
 ### Installation
@@ -33,14 +33,24 @@ npm start
 
 Visit `http://localhost:3000` in your browser.
 
+## Folder Structure
+
+```
+/src
+    /components
+    /pages
+    /utils
+```
+
+## Security
+
+- All notes are encrypted client-side.
+- Passwords are hashed and never stored in plain text.
+
 ## Contributing
 
-Contributions are welcome! Please open issues or submit pull requests.
+Pull requests are welcome. Please open an issue first to discuss changes.
 
 ## License
 
-This project is licensed under the MIT License.
-
----
-
-*Secure your thoughts with SecureNotes!*
+[MIT](LICENSE)
