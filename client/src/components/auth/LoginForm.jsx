@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import API from '../../utils/api';
 
 function LoginForm() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -17,7 +19,8 @@ function LoginForm() {
     try {
       const response = await API.post('/auth/login', form);
       console.log('✅ Login success:', response.data);
-      // 🔜 Save token or redirect to /notes here
+      localStorage.setItem('token', response.data.token);
+      navigate('/notes');
     } catch (err) {
       console.error('❌ Login error:', err.response?.data?.message || err.message);
       setError(err.response?.data?.message || 'Login failed');

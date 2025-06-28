@@ -1,9 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api', // 🔜 Update if backend port changes
-  withCredentials: true, // in case you use cookies for auth
+  baseURL: "http://localhost:5000",
+});
+
+API.interceptors.request.use((req) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    req.headers.Authorization = `Bearer ${token}`;
+  }
+  return req;
 });
 
 export default API;
-
