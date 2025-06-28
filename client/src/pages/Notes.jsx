@@ -23,6 +23,28 @@ const Notes = () => {
       console.error("Error adding note:", err);
     }
   };
+  const deleteNote = async (noteId) => {
+  try {
+    await axios.delete(`/notes/${noteId}`);
+    setNotes((prev) => prev.filter((n) => n._id !== noteId));
+  } catch (err) {
+    console.error(err);
+    alert("Failed to delete note");
+  }
+};
+  const updateNote = async (noteId, updatedData) => {
+    try {
+      const res = await axios.put(`/notes/${noteId}`, updatedData);
+      setNotes((prev) =>
+        prev.map((n) => (n._id === noteId ? res.data : n))
+      );
+    } catch (err) {
+      console.error(err);
+      alert("Failed to update note");
+    }
+  };
+
+
 
   useEffect(() => {
     fetchNotes();
@@ -34,7 +56,7 @@ const Notes = () => {
       <NoteForm onAdd={handleAddNote} />
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 mt-6">
         {notes.map((note) => (
-          <NoteCard key={note._id} note={note} />
+          <NoteCard key={note._id} note={note} onDelete={deleteNote} onEdit={updateNote} />
         ))}
       </div>
     </div>
