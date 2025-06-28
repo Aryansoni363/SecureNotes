@@ -1,43 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const NoteForm = ({ onAdd }) => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [form, setForm] = useState({ title: "", content: "" });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !content) return;
-
-    const newNote = {
-      id: Date.now(), // Temporary ID for now
-      title,
-      content,
-    };
-
-    onAdd(newNote);
-    setTitle('');
-    setContent('');
+    if (!form.title || !form.content) return alert("Fill all fields");
+    onAdd(form);
+    setForm({ title: "", content: "" }); // Reset form
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow p-4 mb-6 max-w-md mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">➕ Add New Note</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-4 rounded shadow-md max-w-xl mx-auto"
+    >
       <input
         type="text"
+        name="title"
         placeholder="Title"
-        className="w-full border p-2 mb-2 rounded"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        className="w-full mb-3 p-2 border rounded"
+        value={form.title}
+        onChange={handleChange}
       />
       <textarea
+        name="content"
         placeholder="Content"
-        className="w-full border p-2 mb-4 rounded"
-        rows="4"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
+        className="w-full mb-3 p-2 border rounded"
+        value={form.content}
+        onChange={handleChange}
+        rows={4}
       />
-      <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-        Save Note
+      <button
+        type="submit"
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      >
+        ➕ Add Note
       </button>
     </form>
   );
